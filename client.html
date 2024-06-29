@@ -1,0 +1,160 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div id="buttonContainer"></div>
+
+        <form id="myForm">
+            <label for="message">Enter your message:</label><br>
+            <input type="text" id="message" name="message"><br>
+            <button type="submit" id="submitButton">Submit</button>
+        </form>
+        <input id="fileInput" type="file" onchange="window.upload(this.files)" multiple="false" />
+        <div id="messageContainer"></div>
+
+        <script type="importmap">
+            {
+              "imports": {
+                "socket.io-client": "https://cdn.socket.io/4.7.5/socket.io.esm.min.js"
+              }
+            }
+          </script>
+          
+          <script type="module">
+            import { io } from "socket.io-client";
+          
+            const socket = io("http://localhost:3000");
+
+
+            let current_room = null
+            const transcripts = {};
+
+            socket.on("connect_error", (err) => {
+                console.log(`connect_error due to ${err.message}`);
+            });
+
+
+            function renderTranscript(listData) {
+                const container = document.getElementById("messageContainer");
+
+                while (container.firstChild) {
+                    container.removeChild(container.firstChild);
+                }
+                console.log("all cleared")
+                listData.forEach(item => {
+                    if(item[0] == "message"){
+                        const messageElement = document.createElement("p");
+                        messageElement.textContent = item[1];
+                        container.appendChild(messageElement);
+                    } else if(item[0] == "file"){
+                        console.log("printing file")
+                        const downloadLink = document.createElement('a');
+                        downloadLink.href = item[1];
+                        downloadLink.textContent = "Download_file" 
+                        container.appendChild(downloadLink);
+
+                    }
+
+            });
+}
+
+            function buttonClickHandler(event) {
+                event.preventDefault()
+                if(current_room != null){
+                    socket.emit('leaveRoom', current_room);
+                }
+                renderTranscript(transcripts[current_room])
+                current_room = event.target.id
+                socket.emit('c_v',current_room)
+            }
+
+            socket.on('connect', () => {
+                console.error("Failed to connect to server, try again in a couple of minutes")
+                console.log('Connected to server');
+
+            });
+
+            socket.on('message',(message)=>{
+ 
+                transcripts[current_room].push(['message',message])
+                renderTranscript(transcripts[current_room])
+            })
+
+            socket.on('serverReady', () => {
+                console.log("connected to Server.")
+
+
+                // get SQL data here
+                const buttonLabels = ["Button 1", "Button 2", "Button 3"];
+
+                
+                const buttonContainer = document.getElementById("buttonContainer");
+                buttonLabels.forEach(label => {
+
+                const button = document.createElement("button");
+                button.id = label
+                button.textContent = label;
+                transcripts[label] = []
+                button.addEventListener("click", buttonClickHandler);
+                buttonContainer.appendChild(button);
+                });
+            });
+
+            socket.on('disconnect', () => {
+                console.log('Disconnected from server');
+            });
+
+            socket.on('error', (error) => {
+                console.error('Connection error:', error.message); // Access error message instead of the error object
+            });
+
+            socket.on("reconnect_attempt", () => {
+            console.log("Attempting to reconnect to the server...");
+            });
+
+            document.addEventListener("DOMContentLoaded", function() {
+            const form = document.getElementById("myForm");
+            const messageInput = document.getElementById("message");
+
+            form.addEventListener("submit", function(event) {
+                event.preventDefault();
+                const message = messageInput.value;
+                socket.emit("sendMessage",current_room, message)
+                messageInput.value = "";
+            });
+
+            window.upload = function(files) {
+                const fileSizeInMB = files[0].size / (1024 * 1024);
+                console.log(fileSizeInMB)
+                console.log(files)
+                if (fileSizeInMB < 1){
+                    socket.emit("upload", files[0], (status) => {
+                    console.log(status);
+                    });
+                }else{
+                    alert("file size too large")
+                }
+                const fileInput = document.getElementById('fileInput');
+                fileInput.value = ''; // Clear the file selection and name
+                fileInput.files = null
+ 
+    }
+
+    socket.on('fileBuffer', (buffer) => {
+        console.log("file received")
+        const blob = new Blob([buffer]);
+        const fileUrl = URL.createObjectURL(blob);
+        console.log(fileUrl)
+        transcripts[current_room].push(['file',fileUrl])
+        renderTranscript(transcripts[current_room])
+});
+
+});
+
+
+          </script>  
+
+
+    </body>
+</html>
