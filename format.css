@@ -1,0 +1,279 @@
+
+
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5f5;
+    overflow: hidden; 
+  }
+  
+  .center-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;  
+    height: 180%;
+    box-sizing: border-box;
+    padding: 20px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+
+  .message-box {
+    max-width: 60%; /* Increase max-width to make it bigger */
+    min-width: 40%;
+    padding: 20px; /* Increase padding for a larger appearance */
+    margin: 20px 0; /* Adjust margin for spacing */
+    border-radius: 10px; /* Larger border-radius for a more rounded appearance */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Enhance shadow for more depth */
+    display: inline-block;
+    word-wrap: break-word; /* Break words to fit container */
+    overflow-wrap: break-word; /* Ensure words break to fit container */
+    background-color: #f9f9f9; /* Optional: Add a background color for better visibility */
+}
+
+  
+  .left {
+    align-self: flex-start;
+    background-color: #f1f1f1;
+  }
+  
+  .right {
+    align-self: flex-end;
+    background-color: #d1e7ff;
+  }
+  
+
+
+  
+  .chat-container {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    max-width: 1600px;
+    min-height: 60vh; /* Set a minimum height for the container */
+    height: auto; 
+    max-height: 60vh;
+    overflow-y: auto;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  
+
+  
+  .chat-bar {
+    position: absolute;
+    bottom: 27%; /* Move it down by 25% of its container height */
+    left: 50%; /* Center it horizontally */
+    transform: translate(-50%, 50%); /* Center it vertically */
+    width: 80%; /* Make it wider */
+    max-width: 600px; /* Set a maximum width */
+    display: flex;
+    border: 1px solid #ccc; /* Add border */
+    border-radius: 5px; /* Optional: Add border radius for rounded corners */
+    padding: 10px;
+  }
+  
+  
+  
+  
+  .chat-textarea {
+    flex: 1; /* Let the input bar grow to take up the available space */
+    padding: 10px;
+    border: 3px solid #ccc;
+    border-radius: 8px;
+    margin-right: 10px; /* Add some margin to separate the input bar from the button */
+    resize: vertical;
+    overflow-y: auto;
+    width: auto;
+  }
+  
+  .chat-bar form {
+    display: flex;
+    flex: 1; /* Let the form grow to take up the available space */
+  }
+  
+  .chat-bar button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .chat-bar button:hover {
+    background-color: #0056b3;
+  }
+  
+  .back-button {
+    position: absolute;
+    top: 50px; /* Adjust the top position as needed */
+    left: 10%;
+    transform: translateX(-50%);
+    padding: 15px 25px; /* Increase padding for a bigger button */
+    background-color: #4682b4; /* Blue color */
+    border: none; /* Remove border for a cleaner look */
+    border-radius: 25px; /* Increase border-radius for a rounded shape */
+    font-size: 18px; /* Increase font size for better visibility */
+    color: #fff; /* White text color */
+    font-weight: bold; /* Bold text for emphasis */
+    text-decoration: none; /* Remove underline from anchor */
+    cursor: pointer; /* Show pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth transition on background color change */
+  }
+  
+  .back-button:hover {
+    background-color: #4169e1; /* Darker blue color on hover */
+  }
+
+  .room-info {
+    font-weight: bold; /* Make the font bold */
+    font-size: 24px; /* Set a larger font size */
+    margin-top: 0px; /* Adjust margin-top to move the text closer to the top */
+    text-align: center; /* Center the text horizontally */
+    font-family: 'Arial', sans-serif; /* Use Arial font or fallback to a sans-serif font */
+    background: linear-gradient(45deg, #66a6ff, #4d94ff); /* Apply a two-color gradient background (bluish) */
+    -webkit-background-clip: text; /* Clip the background to the text */
+    background-clip: text; /* Define the standard property 'background-clip' */
+    -webkit-text-fill-color: transparent; /* Make the text transparent to reveal the gradient background */
+    color: #fff; /* Set the text color to white */
+  }
+  
+  
+  
+  .welcome-container {
+    text-align: center;
+    margin-bottom: 20px; /* Add spacing between the welcome message and room selection */
+  }
+  
+  .welcome-message {
+    font-size: 24px; /* Increase font size for the welcome message */
+    font-weight: bold; /* Make the welcome message bold */
+  }
+  
+  .room-list {
+    list-style: none; /* Remove default list styling */
+    padding: 0; /* Remove default padding */
+  }
+  
+  .room-button {
+    padding: 10px 20px;
+    margin: 5px; /* Add spacing around room buttons */
+    background-color: #007bff; /* Blue color for buttons */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px; /* Adjust font size for buttons */
+    cursor: pointer;
+  }
+  
+  .room-button:hover {
+    background-color: #0056b3; /* Darker blue color on hover */
+  }
+  
+  .message-header {
+    margin-bottom: 5px; /* Add spacing between username and message */
+  }
+  
+  .username {
+    font-weight: bold; /* Make the username bold */
+  }
+
+  .reply-container {
+    margin-top: 10px;
+    padding: 10px;
+    border-left: 3px solid #ccc;
+    background-color: #f9f9f9;
+  }
+  
+  .reply-header {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .reply-parent {
+    max-width: 70%;
+    width: auto; /* Adjust width automatically */
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    display: inline-block;
+    word-wrap: break-word; /* Break words to fit container */
+    overflow-wrap: break-word; /* Ensure words break to fit container */
+  }
+  
+  
+  .reply-content {
+    font-size: 16px;
+    margin-left: 10px;
+  }
+  .chat-input-form {
+    display: flex;
+    flex-direction: column;
+    width: auto; /* Ensure the form takes the full width of its container */
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .chat-textarea_ {
+    width: 100%; /* Make the textarea take the full width of the container */
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    resize: none;
+    margin-bottom: 10px;
+    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .chat-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    transition: background-color 0.3s;
+  }
+  
+  .chat-button:hover {
+    background-color: #0056b3;
+  }
+  .room-name {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f0f0f0;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    /* Add more styles as needed */
+}
+
