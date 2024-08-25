@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project is a full-stack messaging application developed between April and May 2024. The application is designed to support real-time communication across different chat rooms, allowing multiple users to send messages and replies. The frontend is built with React, while the backend is powered by Node.js. The system is optimized for performance and security, featuring real-time caching, event handling, and secure session management.
+This project is a full-stack messaging application developed with Redis Cache. The application is designed to support real-time communication across different chat rooms, allowing multiple users to send messages and replies. The frontend is built with React, while the backend is powered by Node.js. The system is optimized for performance and security, featuring real-time caching, event handling, and secure session management.
 
 ## Key Features
 
